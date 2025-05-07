@@ -25,7 +25,7 @@ export const useAnimateOnScroll = ({
     }
   }, [controls, inView]);
 
-  return [ref, controls, inView];
+  return [ref as unknown as RefObject<any>, controls, inView];
 };
 
 export default useAnimateOnScroll;
