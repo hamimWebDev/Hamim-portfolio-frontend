@@ -7,7 +7,7 @@ export const blogs = [
     url: "https://www.freecodecamp.org/news/learn-html-css-and-javascript-with-these-free-online-courses/",
     img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&auto=format&fit=crop&q=60",
     description:
-      "Learn how to resolve common installation issues with GitHub and set up your environment properly.",
+      "Learn how to resolve common installation issues with GitHub and set up your environment properly. Learn how to resolve common installation issues with GitHub and set up your environment properly. Learn how to resolve common installation issues with GitHub and set up your environment properly. Learn how to resolve common installation issues with GitHub and set up your environment properly.",
   },
   {
     id: 2,

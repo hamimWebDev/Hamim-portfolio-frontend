@@ -44,7 +44,7 @@ const Blog: React.FC<any> = ({ blog }) => {
                 <h3 className="line-clamp-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
                   {title}
                 </h3>
-                <p className="line-clamp-3 text-sm text-gray-500 dark:text-gray-400">
+                <p className="line-clamp-4 text-sm text-gray-500 dark:text-gray-400">
                   {description}
                 </p>
               </div>
