@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects } from '@/redux/slices/projectsSlice';
 import { RootState } from '@/redux/store';
 import ProjectCard from '@/components/ProjectCard';
+import Skills from '@/components/Skills';
 
 const Home: NextPage = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Home: NextPage = () => {
       transition={{ duration: 0.4 }}
     >
       <HeroSection />
+      <Skills />
       
       {/* Skills Section */}
       <section className="py-20 bg-gray-50 dark:bg-gray-900">

@@ -1,40 +1,21 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleTheme, setTheme } from '@/redux/slices/themeSlice';
-import { RootState } from '@/redux/store';
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setTheme } from "@/redux/slices/themeSlice";
+import { RootState } from "@/redux/store";
 
 export const useTheme = () => {
   const { darkMode } = useSelector((state: RootState) => state.theme);
   const dispatch = useDispatch();
 
-  // Effect to set initial theme based on localStorage or system preference
+  // Effect to enforce dark mode
   useEffect(() => {
-    // Check for saved theme preference in localStorage
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme) {
-      dispatch(setTheme(savedTheme === 'dark'));
-    } else {
-      // If no saved preference, use system preference
-      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      dispatch(setTheme(prefersDarkMode));
-    }
+    dispatch(setTheme(true)); // Always set dark mode
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
   }, [dispatch]);
-
-  // Effect to apply theme changes to the DOM and localStorage
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [darkMode]);
 
   return {
     darkMode,
-    toggleTheme: () => dispatch(toggleTheme()),
   };
 };
 
