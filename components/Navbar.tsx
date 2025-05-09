@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
+import profileImage from "../Images/profile_image.jpg";
+import Image from "next/image";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -23,9 +25,9 @@ const useTheme = () => {
 
   const toggleTheme = () => {
     setDarkMode((prev) => {
-      const newTheme = !prev;
-      localStorage.setItem("theme", newTheme ? "dark" : "light");
-      return newTheme;
+      const newMode = !prev;
+      localStorage.setItem("theme", newMode ? "dark" : "light");
+      return newMode;
     });
   };
 
@@ -57,11 +59,10 @@ const Navbar = () => {
     <header className={navbarClasses}>
       <nav className="container-custom flex items-center justify-between">
         {/* Logo */}
-        <Link
-          href="/"
-          className="text-2xl font-bold text-primary-600 dark:text-primary-400"
-        >
-          Portfolio
+        <Link href="/" className="cursor-pointer text-xl flex items-end">
+          <img src="https://i.ibb.co/jHbyW2c/p.png" alt="" className="w-8" />
+          <span className="text-3xl text-white font-bold">ort</span>
+          <span className="text-3xl font-bold text-[#00C0FF]">folio</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -89,11 +90,19 @@ const Navbar = () => {
 
         {/* Theme toggle and mobile menu button */}
         <div className="flex items-center space-x-4">
-          <img
-            src="https://scontent.fdac183-1.fna.fbcdn.net/v/t39.30808-6/474045810_591381600437197_252489797853708854_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeF74BnXm2VfyrcAeX7kptkA6qJzvtLPY23qonO-0s9jbQCj4_ziRTtzxSkShllMG01taqaccd8AoKpsL5jVy4JQ&_nc_ohc=Vnqze1EgZwIQ7kNvwGnIAs-&_nc_oc=Adkq7ABf4hlsJl07xDtz3k5GE94QhP5I6-ece0xLGtvoj1e_vWvw6P-djp0E3XMufqs&_nc_zt=23&_nc_ht=scontent.fdac183-1.fna&_nc_gid=cBbAVX-yHWYN2psyvYl8Tw&oh=00_AfJyDBctZB6hsBZzKM5l0Vre511hXmbPn6z5c7T0LKpaWw&oe=682340E4"
+          <Image
+            src={profileImage}
             alt="Portfolio Logo"
             className="w-8 h-8 rounded-full"
           />
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            aria-label="Toggle mobile menu"
+          >
+            {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </button>
         </div>
       </nav>
 
