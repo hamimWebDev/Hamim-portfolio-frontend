@@ -1,7 +1,7 @@
 import TypeWriter from "@/hooks/TypeWriter/TypeWriter";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
+import profileImage from "../Images/profile_image.jpg";
 
 const HeroSection = () => {
   const containerVariants = {
@@ -85,12 +85,12 @@ const HeroSection = () => {
                 transition={{ delay: 1 }}
                 href="/Hamim_s_Resume-1.pdf"
                 download="Hamim_Resume.pdf"
-                className="inline-block mt-8"
+                className="inline-block mt-2 lg:mt-5"
               >
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="relative px-8 py-3 text-lg font-semibold text-white rounded-lg overflow-hidden group"
+                  className="relative p-[2px] lg:p-4  text-lg font-semibold text-white rounded-lg overflow-hidden group"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-90 group-hover:opacity-100 transition-opacity"></div>
                   <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
@@ -118,12 +118,12 @@ const HeroSection = () => {
                 transition={{ delay: 1 }}
                 href="/Md. Hamim _ Cv_.pdf"
                 download="Md. Hamim _ Cv_.pdf"
-                className="inline-block mt-8"
+                className="inline-block mt-2 lg:mt-5"
               >
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="relative px-8 py-3 text-lg font-semibold text-white rounded-lg overflow-hidden group"
+                  className="relative p-[2px] lg:p-4  text-lg font-semibold text-white rounded-lg overflow-hidden group"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-pink-500 to-purple-500 opacity-90 group-hover:opacity-100 transition-opacity"></div>
                   <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
@@ -156,7 +156,7 @@ const HeroSection = () => {
           >
             <div className="relative h-full w-full rounded-lg overflow-hidden">
               <Image
-                src="https://images.pexels.com/photos/7988079/pexels-photo-7988079.jpeg"
+                src={profileImage}
                 alt="Developer working on code"
                 fill
                 style={{ objectFit: "cover" }}

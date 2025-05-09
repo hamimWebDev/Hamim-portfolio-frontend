@@ -10,7 +10,7 @@ const Skills = () => {
   const skill = skills;
 
   return (
-    <div className=" flex items-center">
+    <div className=" flex items-center pb-20 ">
       <div className="container mx-auto px-4">
         <div className="lg:py-10 mb-11 lg:mt-1 ">
           <div className="text-center">
