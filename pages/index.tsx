@@ -10,9 +10,8 @@ import { fetchProjects } from "@/redux/slices/projectsSlice";
 import { RootState } from "@/redux/store";
 import ProjectCard from "@/components/ProjectCard";
 import Skills from "@/components/Skills";
+import HomeBlogs from "@/components/HomeBlogs";
 
-import Note from "@/components/Note";
-import Blogs from "@/components/Blogs";
 
 
 const Home: NextPage = () => {
@@ -42,7 +41,7 @@ const Home: NextPage = () => {
       <HeroSection />
       <Skills />
       
-      <Blogs/>
+      <HomeBlogs/>
      
 
       {/* Skills Section */}

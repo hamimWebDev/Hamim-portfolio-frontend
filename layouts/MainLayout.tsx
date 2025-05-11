@@ -12,9 +12,10 @@ interface MainLayoutProps {
 
 const MainLayout: FC<MainLayoutProps> = ({
   children,
-  title = 'Developer Portfolio',
+  title = 'Md. Hamim Howlader Asif',
   description = 'Professional MERN stack developer portfolio showcasing projects and skills',
 }) => {
+ 
   const { darkMode } = useTheme();
 
   return (
