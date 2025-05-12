@@ -11,8 +11,7 @@ import { RootState } from "@/redux/store";
 import ProjectCard from "@/components/ProjectCard";
 import Skills from "@/components/Skills";
 import HomeBlogs from "@/components/HomeBlogs";
-
-
+import Journey from "@/components/AllJourney/Journey";
 
 const Home: NextPage = () => {
   const dispatch = useDispatch();
@@ -36,26 +35,67 @@ const Home: NextPage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      
-
       <HeroSection />
       <Skills />
-      
-      <HomeBlogs/>
-     
+      <Journey />
+      {/* Featured Projects Section */}
+      <section className="py-20">
+        <div className="container-custom">
+          <AnimatedSection className="text-center mb-16">
+            <div className="lg:py-10 mb-11 lg:mt-1 ">
+              <div className="text-center">
+                <h3 className="text-4xl text-[#00C0FF] ">
+                  &lt; Projects /&gt;
+                </h3>
+                <h1 className="text-3xl mt-3 lg:text-5xl text-white font-bold lg:mt-5">
+                  My Featured Projects
+                </h1>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {loading ? (
+            <div className="flex justify-center items-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                {featuredProjects.map((project, index) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    index={index}
+                  />
+                ))}
+              </div>
+
+              <div className="text-center">
+                <Link href="/projects" className="btn btn-primary">
+                  View All Projects
+                </Link>
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+
+      <HomeBlogs />
 
       {/* Skills Section */}
       <section className="py-20 bg-gray-50 dark:bg-gray-900">
-       
         <div className="container-custom">
           <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              My Expertise
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              With over 5 years of experience in web development, I've mastered
-              the following technologies and tools.
-            </p>
+            <div className="lg:py-10 mb-11 lg:mt-1 ">
+              <div className="text-center">
+                <h3 className="text-4xl text-[#00C0FF] ">
+                  &lt; Expertise /&gt;
+                </h3>
+                <h1 className="text-3xl mt-3 lg:text-5xl text-white font-bold lg:mt-5">
+                  My Technical Expertise
+                </h1>
+              </div>
+            </div>
           </AnimatedSection>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -120,45 +160,6 @@ const Home: NextPage = () => {
               </div>
             </AnimatedSection>
           </div>
-        </div>
-      </section>
-
-      {/* Featured Projects Section */}
-      <section className="py-20">
-        <div className="container-custom">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Featured Projects
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Take a look at some of my recent work. These projects showcase my
-              skills and expertise in web development.
-            </p>
-          </AnimatedSection>
-
-          {loading ? (
-            <div className="flex justify-center items-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
-            </div>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                {featuredProjects.map((project, index) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    index={index}
-                  />
-                ))}
-              </div>
-
-              <div className="text-center">
-                <Link href="/projects" className="btn btn-primary">
-                  View All Projects
-                </Link>
-              </div>
-            </>
-          )}
         </div>
       </section>
 

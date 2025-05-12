@@ -16,7 +16,7 @@ const Skills = () => {
           <div className="text-center">
             <h3 className="text-4xl text-[#00C0FF] ">&lt; Skills /&gt;</h3>
             <h1 className="text-3xl mt-3 lg:text-5xl text-white font-bold lg:mt-5">
-              My Technical Expertise
+              My Technical Skills
             </h1>
           </div>
         </div>

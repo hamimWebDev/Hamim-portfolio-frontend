@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
-import profileImage from "../Images/profile_image.jpg";
+import profileImage from "../Images/H-letter-logo.jpg";
 import Image from "next/image";
 
 const navItems = [
