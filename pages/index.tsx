@@ -19,6 +19,9 @@ const Home: NextPage = () => {
     (state: RootState) => state.projects
   );
 
+  console.log("Projects:", projects);
+  
+
   useEffect(() => {
     dispatch(fetchProjects() as any);
   }, [dispatch]);

@@ -10,7 +10,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: FC<ProjectCardProps> = ({ project, index }) => {
-  const { title, description, image, tags, liveUrl, githubUrl } = project;
+  const { title, description, image, technologies, liveLink, githubUrl } = project;
   
   return (
     <motion.article 
@@ -41,7 +41,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project, index }) => {
         
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {tags.map((tag) => (
+          {technologies.map((tag) => (
             <span 
               key={tag} 
               className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm text-gray-700 dark:text-gray-300"
@@ -53,9 +53,9 @@ const ProjectCard: FC<ProjectCardProps> = ({ project, index }) => {
         
         {/* Links */}
         <div className="flex items-center space-x-4 mt-4">
-          {liveUrl && (
+          {liveLink && (
             <a 
-              href={liveUrl} 
+              href={liveLink} 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center text-primary-600 dark:text-primary-400 hover:underline"

@@ -6,9 +6,9 @@ export interface Project {
   title: string;
   description: string;
   image: string;
-  tags: string[];
+  technologies: string[];
   category: string;
-  liveUrl?: string;
+  liveLink?: string;
   githubUrl?: string;
   featured: boolean;
 }
@@ -33,14 +33,15 @@ export const fetchProjects = createAsyncThunk(
   'projects/fetchProjects',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`);
-      return response.data;
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/work`);
+      return response.data.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch projects');
     }
   }
 );
 
+console.log(fetchProjects)
 const projectsSlice = createSlice({
   name: 'projects',
   initialState,
