@@ -10,7 +10,7 @@ const journeyApi = baseApi.injectEndpoints({
                     method: "GET",
                 };
             },
-            providesTags: ["journey s"],
+            providesTags: ["journey"],
             transformResponse: (response: any) => {
                 return response?.data;
             },
