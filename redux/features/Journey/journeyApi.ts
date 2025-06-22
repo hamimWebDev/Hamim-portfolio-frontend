@@ -17,6 +17,7 @@ const journeyApi = baseApi.injectEndpoints({
         }),
 
     }),
+    overrideExisting: true,
 });
 
 export const {
