@@ -1,7 +1,8 @@
+import { RootState } from "@/Redux/store";
+import { setTheme } from "@/Redux/themeSlice";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setTheme } from "@/redux/slices/themeSlice";
-import { RootState } from "@/redux/store";
+
 
 export const useTheme = () => {
   const { darkMode } = useSelector((state: RootState) => state.theme);

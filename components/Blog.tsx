@@ -50,28 +50,38 @@ const Blog: React.FC<any> = ({ blog }) => {
               </div>
 
               <div className="pt-4">
-                <Link
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-sm font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-                >
-                  Read more
-                  <svg
-                    className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                {url ? (
+                  <Link
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-sm font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </Link>
+                    Read more
+                    <svg
+                      className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </Link>
+                ) : (
+                  <button
+                    className="inline-flex items-center text-sm font-medium text-gray-400 bg-gray-200 dark:bg-gray-700 rounded px-3 py-1 opacity-60 cursor-not-allowed"
+                    disabled
+                    title="No link available"
+                  >
+                    Read more
+                  </button>
+                )}
               </div>
             </div>
           </div>

@@ -1,166 +1,222 @@
-import { useState, FormEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { motion } from 'framer-motion';
-import { FiSend, FiCheck, FiAlertTriangle } from 'react-icons/fi';
-import { submitContactForm, resetContactState, ContactFormData } from '@/redux/slices/contactSlice';
-import { RootState } from '@/redux/store';
+import { useState, useEffect } from "react";
 
 const ContactForm = () => {
-  const dispatch = useDispatch();
-  const { loading, success, error } = useSelector((state: RootState) => state.contact);
-  
-  const [formData, setFormData] = useState<ContactFormData>({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
-  
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [focused, setFocused] = useState({
+    name: false,
+    email: false,
+    subject: false,
+    message: false,
+  });
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
-  
-  const handleSubmit = async (e: FormEvent) => {
+
+  const handleFocus = (field: string) => {
+    setFocused({ ...focused, [field]: true });
+  };
+
+  const handleBlur = (field: string) => {
+    setFocused({ ...focused, [field]: false });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(submitContactForm(formData) as any);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+      setForm({ name: "", email: "", subject: "", message: "" });
+    }, 1200); // Simulate async
   };
-  
-  const resetForm = () => {
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-    });
-    dispatch(resetContactState());
-  };
-  
+
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 md:p-8">
-      {success ? (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center py-8"
-        >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-success-50 text-success-500 mb-6">
-            <FiCheck size={32} />
-          </div>
-          <h3 className="text-2xl font-bold mb-4">Message Sent Successfully!</h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-8">
-            Thank you for reaching out. I'll get back to you as soon as possible.
-          </p>
-          <button
-            onClick={resetForm}
-            className="btn btn-primary"
-          >
-            Send Another Message
-          </button>
-        </motion.div>
-      ) : (
-        <>
-          <h2 className="text-2xl font-bold mb-6">Get In Touch</h2>
-          
-          {error && (
-            <div className="mb-6 p-4 bg-error-50 text-error-700 rounded-lg flex items-start">
-              <FiAlertTriangle className="mr-2 mt-0.5" />
-              <span>{error}</span>
-            </div>
-          )}
-          
-          <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="input-field"
-                  placeholder="Your name"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="input-field"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-            </div>
-            
+    <div className="relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 rounded-2xl"></div>
+      
+      {/* Animated background elements */}
+      <div className="absolute top-0 left-0 w-32 h-32 bg-primary-200 dark:bg-primary-800 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+      <div className="absolute top-0 right-0 w-32 h-32 bg-secondary-200 dark:bg-secondary-800 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute bottom-0 left-0 w-32 h-32 bg-accent-200 dark:bg-accent-800 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      
+      <div className="relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/20 p-8 md:p-10 lg:p-12 w-full max-w-xl mx-auto">
+        {submitted ? (
+          <div className="text-center animate-fade-in">
             <div className="mb-6">
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Subject
-              </label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-                className="input-field"
-                placeholder="What is this regarding?"
-              />
+              <div className="w-16 h-16 bg-success-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent mb-3">
+                Thank you!
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+                Your message has been sent successfully. I'll get back to you soon.
+              </p>
             </div>
-            
-            <div className="mb-6">
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={6}
-                className="input-field"
-                placeholder="Your message here..."
-              />
-            </div>
-            
-            <motion.button
-              type="submit"
-              className="btn btn-primary w-full"
-              disabled={loading}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            <button
+              className="btn btn-primary mt-6 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              onClick={() => setSubmitted(false)}
             >
-              {loading ? (
-                <span className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Sending...
-                </span>
-              ) : (
-                <span className="flex items-center justify-center">
-                  <FiSend className="mr-2" />
-                  Send Message
-                </span>
-              )}
-            </motion.button>
-          </form>
-        </>
-      )}
+              Send Another Message
+            </button>
+          </div>
+        ) : (
+          <div className="animate-fade-in">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent mb-2">
+                Get In Touch
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300">
+                Let's start a conversation about your next project
+              </p>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="group animate-slide-up" style={{ animationDelay: '0.1s' }}>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    className="w-full px-4 py-4 text-gray-900 dark:text-white bg-white/50 dark:bg-gray-800/50 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 backdrop-blur-sm peer"
+                    placeholder=" "
+                    value={form.name}
+                    onChange={handleChange}
+                    onFocus={() => handleFocus('name')}
+                    onBlur={() => handleBlur('name')}
+                    required
+                    autoComplete="name"
+                  />
+                  <label
+                    htmlFor="name"
+                    className={`absolute left-4 transition-all duration-300 pointer-events-none ${
+                      focused.name || form.name
+                        ? 'top-2 text-xs text-primary-600 dark:text-primary-400 bg-white dark:bg-gray-900 px-2'
+                        : 'top-4 text-base text-gray-500 dark:text-gray-400'
+                    }`}
+                  >
+                    Full Name
+                  </label>
+                </div>
+              </div>
+
+              <div className="group animate-slide-up" style={{ animationDelay: '0.2s' }}>
+                <div className="relative">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="w-full px-4 py-4 text-gray-900 dark:text-white bg-white/50 dark:bg-gray-800/50 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 backdrop-blur-sm peer"
+                    placeholder=" "
+                    value={form.email}
+                    onChange={handleChange}
+                    onFocus={() => handleFocus('email')}
+                    onBlur={() => handleBlur('email')}
+                    required
+                    autoComplete="email"
+                  />
+                  <label
+                    htmlFor="email"
+                    className={`absolute left-4 transition-all duration-300 pointer-events-none ${
+                      focused.email || form.email
+                        ? 'top-2 text-xs text-primary-600 dark:text-primary-400 bg-white dark:bg-gray-900 px-2'
+                        : 'top-4 text-base text-gray-500 dark:text-gray-400'
+                    }`}
+                  >
+                    Email Address
+                  </label>
+                </div>
+              </div>
+
+              <div className="group animate-slide-up" style={{ animationDelay: '0.3s' }}>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    className="w-full px-4 py-4 text-gray-900 dark:text-white bg-white/50 dark:bg-gray-800/50 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 backdrop-blur-sm peer"
+                    placeholder=" "
+                    value={form.subject}
+                    onChange={handleChange}
+                    onFocus={() => handleFocus('subject')}
+                    onBlur={() => handleBlur('subject')}
+                    required
+                  />
+                  <label
+                    htmlFor="subject"
+                    className={`absolute left-4 transition-all duration-300 pointer-events-none ${
+                      focused.subject || form.subject
+                        ? 'top-2 text-xs text-primary-600 dark:text-primary-400 bg-white dark:bg-gray-900 px-2'
+                        : 'top-4 text-base text-gray-500 dark:text-gray-400'
+                    }`}
+                  >
+                    Subject
+                  </label>
+                </div>
+              </div>
+
+              <div className="group animate-slide-up" style={{ animationDelay: '0.4s' }}>
+                <div className="relative">
+                  <textarea
+                    id="message"
+                    name="message"
+                    className="w-full px-4 py-4 text-gray-900 dark:text-white bg-white/50 dark:bg-gray-800/50 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 backdrop-blur-sm peer resize-none min-h-[120px]"
+                    placeholder=" "
+                    value={form.message}
+                    onChange={handleChange}
+                    onFocus={() => handleFocus('message')}
+                    onBlur={() => handleBlur('message')}
+                    required
+                  />
+                  <label
+                    htmlFor="message"
+                    className={`absolute left-4 transition-all duration-300 pointer-events-none ${
+                      focused.message || form.message
+                        ? 'top-2 text-xs text-primary-600 dark:text-primary-400 bg-white dark:bg-gray-900 px-2'
+                        : 'top-4 text-base text-gray-500 dark:text-gray-400'
+                    }`}
+                  >
+                    Your Message
+                  </label>
+                </div>
+              </div>
+
+              <div className="animate-slide-up" style={{ animationDelay: '0.5s' }}>
+                <button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white font-semibold py-4 px-6 rounded-xl transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Sending Message...</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center space-x-2">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                      <span>Send Message</span>
+                    </div>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

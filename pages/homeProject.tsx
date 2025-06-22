@@ -30,7 +30,7 @@ const TabsTrigger = ({ value, selected, onClick, children }: any) => (
 );
 const TabsContent = ({ children }: any) => <div>{children}</div>;
 
-const Projects: NextPage = () => {
+const homeProject: NextPage = () => {
   const { data: projects, isLoading, isError } = useGetAllProductsQuery(undefined);
   const [tabValue, setTabValue] = useState("all");
   const [visibleItems, setVisibleItems] = useState(6);
@@ -66,32 +66,15 @@ const Projects: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Projects</title>
-        <meta
-          name="description"
-          content="This is  Md. Hamim Howlader Asif's Portfolio Projects page"
-        />
-      </Head>
+      
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.4 }}
       >
-        <section className="pt-32 pb-8 md:pt-40 md:pb-12">
-          <div className="container-custom">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                My Projects
-              </h1>
-              <p className="text-xl text-gray-600 dark:text-gray-400">
-                Explore my latest work and creative solutions.
-              </p>
-            </div>
-          </div>
-        </section>
-        <section className="py-8">
+        
+        <section>
           <div className="container-custom">
             <Tabs value={tabValue} onValueChange={setTabValue}>
               {({ value, onValueChange }: any) => (
@@ -148,4 +131,4 @@ const Projects: NextPage = () => {
   );
 };
 
-export default Projects;
+export default homeProject;
