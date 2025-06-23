@@ -11,7 +11,7 @@ import ProjectCard from "@/components/ProjectCard";
 import Skills from "@/components/Skills";
 import HomeBlogs from "@/components/HomeBlogs";
 import Journey from "@/components/AllJourney/Journey";
-import { RootState } from "@/Redux/store";
+import { RootState } from "@/redux/store";
 import HomeProject from "./homeProject";
 import Head from "next/head";
 

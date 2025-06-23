@@ -9,7 +9,7 @@ import {
 
 import { toast } from "sonner";
 
-import { RootState } from "../store"; // Assuming your RootState is exported from here
+
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `https://hamim-portfolio-backend.vercel.app/api`,
@@ -31,7 +31,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   }
   if (result?.error?.status === 401) {
     const res = await fetch(
-      "https://e-commerce-backend-seven-beta.vercel.app/api/v1/auth/refresh-token",
+      "https://e-commerce-backend-seven-beta.vercel.app/api/auth/refresh-token",
       {
         method: "POST",
         credentials: "include",
@@ -49,6 +49,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["admins", "users", "categories", "products", "cart", "orders", "journey"],
+  tagTypes: ["admins", "users", "categories", "products", "cart", "orders", "blogs", "journey s"],
   endpoints: () => ({}),
 });

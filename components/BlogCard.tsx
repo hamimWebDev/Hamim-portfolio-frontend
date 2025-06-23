@@ -51,9 +51,9 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
               <Image
                 alt={`${blog.author}'s cover image`}
                 src={blog.coverImage || "/default-avatar.png"}
-                layout="fill"
-                objectFit="cover"
-                className="transition-transform duration-500 group-hover:scale-110"
+                fill
+                sizes="(max-width: 768px) 100vw, 400px"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
                 priority
               />
             </motion.div>

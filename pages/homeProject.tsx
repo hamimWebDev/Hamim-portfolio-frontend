@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProjectCard from "@/components/ProjectCard";
 import AnimatedSection from "@/components/AnimatedSection";
 import Head from "next/head";
-import { useGetAllProductsQuery } from "@/Redux/features/products/productsApi";
+import { useGetAllProductsQuery } from "@/redux/features/products/productsApi";
 
 // Simple Tabs implementation (inline, since no UI lib found)
 const Tabs = ({ value, onValueChange, children }: any) => (
@@ -80,9 +80,9 @@ const homeProject: NextPage = () => {
               {({ value, onValueChange }: any) => (
                 <>
                   <TabsList>
-                    {tabData.map((item) => (
+                    {tabData.map((item, idx) => (
                       <TabsTrigger
-                        key={item.category}
+                        key={`${item.category}-${idx}`}
                         value={item.category}
                         selected={value === item.category}
                         onClick={() => {
@@ -99,7 +99,7 @@ const homeProject: NextPage = () => {
                       <AnimatePresence>
                         {filteredProjects.slice(0, visibleItems).map((project, index) => (
                           <motion.div
-                            key={project.id}
+                            key={`${project.id ?? "noid"}-${index}`}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 20 }}

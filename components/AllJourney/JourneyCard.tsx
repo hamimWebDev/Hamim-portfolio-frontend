@@ -159,6 +159,7 @@ const JourneyCard: React.FC<any> = ({
                     src={logoUrl}
                     fill
                     alt=""
+                    sizes="(max-width: 768px) 100vw, 300px"
                     className="object-contain filter drop-shadow-lg group-hover/logo:drop-shadow-xl transition-all duration-300"
                   />
                   {/* Subtle glow effect */}

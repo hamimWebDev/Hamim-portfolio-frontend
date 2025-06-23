@@ -44,6 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           alt={title}
           priority
           fill
+          sizes="(max-width: 768px) 100vw, 400px"
           className="object-cover group-hover:scale-110 transition-all duration-700 ease-out work-image-scroll"
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500" />

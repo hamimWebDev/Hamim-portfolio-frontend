@@ -5,7 +5,7 @@ import Marquee from "react-fast-marquee";
 import { motion } from "framer-motion";
 import SectionTitle from "@/hooks/SectionTitle/SectionTitle";
 
-import { useGetAllJourneysQuery } from "@/Redux/features/Journey/journeyApi";
+import { useGetAllJourneysQuery } from "@/redux/features/Journey/journeyApi";
 
 const Skills = () => {
 
@@ -47,7 +47,7 @@ const Skills = () => {
               {journeyList
                 .filter((item) => item.type === "skill")
                 .map((skl, index) => {
-                  console.log('skl:', skl);
+                 
                   return (
                     <motion.div
                       key={index}

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProjectCard from "@/components/ProjectCard";
 import AnimatedSection from "@/components/AnimatedSection";
 import Head from "next/head";
-import { useGetAllProductsQuery } from "@/Redux/features/products/productsApi";
+import { useGetAllProductsQuery } from "@/redux/features/products/productsApi";
 
 // Simple Tabs implementation (inline, since no UI lib found)
 const Tabs = ({ value, onValueChange, children }: any) => (

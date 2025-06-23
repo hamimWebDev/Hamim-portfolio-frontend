@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import MainLayout from "@/layouts/MainLayout";
 import { AnimatePresence } from "framer-motion";
 import { AuthProvider } from "@/context/AuthContext";
-import { store } from "@/Redux/store";
+import { store } from "@/redux/store";
 
 export default function App({ Component, pageProps, router }: AppProps) {
   return (

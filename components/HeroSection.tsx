@@ -159,6 +159,7 @@ const HeroSection = () => {
                 src={profileImage}
                 alt="Developer working on code"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 style={{ objectFit: "cover" }}
                 priority
                 className="rounded-lg"

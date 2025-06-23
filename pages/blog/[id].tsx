@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useGetBlogByIdQuery } from "@/Redux/features/Blogs/blogsApi";
+import { useGetBlogByIdQuery } from "@/redux/features/Blogs/blogsApi";
 import Head from "next/head";
 import Image from "next/image";
 
@@ -33,7 +33,7 @@ const BlogDetails = () => {
           <span className="text-gray-400 text-sm">{new Date(blog.createdAt).toLocaleDateString()}</span>
         </div>
         <div className="relative w-full h-64 mb-8 rounded-lg overflow-hidden">
-          <Image src={blog.coverImage || "/default-avatar.png"} alt={blog.title} layout="fill" objectFit="cover" />
+          <Image src={blog.coverImage || "/default-avatar.png"} alt={blog.title} fill sizes="(max-width: 768px) 100vw, 700px" className="object-cover" />
         </div>
         <div className="prose dark:prose-invert max-w-none mb-6">
           <p>{blog.content}</p>

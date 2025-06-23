@@ -3,7 +3,7 @@
 import { useState } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import BlogCard from "@/components/BlogCard";
-import { useGetAllblogsQuery } from "@/Redux/features/Blogs/blogsApi";
+import { useGetAllblogsQuery } from "@/redux/features/Blogs/blogsApi";
 
 const HomeBlogs = () => {
   // Fetch blogs using the existing RTK Query hook

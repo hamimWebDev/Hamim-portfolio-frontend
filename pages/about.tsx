@@ -4,11 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
 import Head from "next/head";
-import { useGetAllProductsQuery } from "@/Redux/features/products/productsApi";
+import { useGetAllProductsQuery } from "@/redux/features/products/productsApi";
 
 const About: NextPage = () => {
   const { data: projects, isLoading, isError } = useGetAllProductsQuery(undefined);
-     console.log(projects, "projects");
+    
   return (
     <>
       <Head>
@@ -48,6 +48,7 @@ const About: NextPage = () => {
                     src="https://images.pexels.com/photos/7988116/pexels-photo-7988116.jpeg"
                     alt="Developer Portrait"
                     fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     style={{ objectFit: "cover" }}
                     className="rounded-xl"
                   />

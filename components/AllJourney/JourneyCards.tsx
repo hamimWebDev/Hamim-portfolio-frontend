@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import JourneyCard from "./JourneyCard";
 import { useEffect, useState } from "react";
-import { useGetAllJourneysQuery } from "@/Redux/features/Journey/journeyApi";
+import { useGetAllJourneysQuery } from "@/redux/features/Journey/journeyApi";
+
 
 const tabOptions = [
   { label: "Experience", value: "experience" },
