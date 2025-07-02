@@ -1,103 +1,62 @@
 import { NextPage } from "next";
-import { motion } from "framer-motion";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
-import Head from "next/head";
-import { useGetAllProductsQuery } from "@/redux/features/products/productsApi";
+import Button from "@/components/ui/Button";
 
 const About: NextPage = () => {
-  const { data: projects, isLoading, isError } = useGetAllProductsQuery(undefined);
-    
   return (
     <>
       <Head>
-        <title>About</title>
-        <meta
-          name="description"
-          content="This is  Md. Hamim Howlader Asif's Portfolio About page"
-        />
+        <title>About Me | Portfolio</title>
+        <meta name="description" content="Learn more about my journey, experience, and what drives me to create exceptional web applications." />
       </Head>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.4 }}
-      >
-        {/* Header */}
-        <section className="pt-32 pb-16 md:pt-40 md:pb-20">
-          <div className="container-custom">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">About Me</h1>
-              <p className="text-xl text-gray-600 dark:text-gray-400">
-                Learn more about my journey, experience, and what drives me to
-                create exceptional web applications.
-              </p>
+      <section className="min-h-screen bg-gray-900 text-gray-100 flex flex-col">
+        {/* Hero Section */}
+        <AnimatedSection direction="up" delay={0.1} className="section text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">About Me</h1>
+          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
+            Learn more about my journey, experience, and what drives me to create exceptional web applications.
+          </p>
+        </AnimatedSection>
+
+        {/* Story Section */}
+        <AnimatedSection direction="up" delay={0.2} className="section flex flex-col lg:flex-row items-center justify-center gap-12 container-custom">
+          {/* Image */}
+          <div className="w-full max-w-md flex-shrink-0 rounded-2xl overflow-hidden shadow-xl border border-gray-800 bg-gray-800">
+            <Image
+              src="/icon/profile_image.jpg"
+              alt="Profile image"
+              width={600}
+              height={400}
+              className="object-cover w-full h-full rounded-2xl"
+              priority
+            />
+          </div>
+          {/* Story Text */}
+          <div className="flex-1 max-w-2xl text-left">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">My Story</h2>
+            <p className="text-base md:text-lg text-gray-300 mb-4">
+              I'm a passionate full-stack developer with a focus on the MERN stack (MongoDB, Express, React, Node.js). With over 5 years of experience in web development, I've had the opportunity to work on a wide range of projects from small business websites to complex web applications.
+            </p>
+            <p className="text-base md:text-lg text-gray-300 mb-4">
+              My journey in web development began when I was in college, where I discovered my passion for creating interactive and user-friendly web experiences. Since then, I've been constantly learning and improving my skills to stay up-to-date with the latest technologies and best practices.
+            </p>
+            <p className="text-base md:text-lg text-gray-300 mb-8">
+              What drives me is the opportunity to solve complex problems and create solutions that make a positive impact. I believe in clean code, user-centered design, and the power of technology to transform businesses and lives.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/projects" passHref legacyBehavior>
+                <a><Button variant="primary" size="md">View My Work</Button></a>
+              </Link>
+              <Link href="/contact" passHref legacyBehavior>
+                <a><Button variant="outline" size="md">Get in Touch</Button></a>
+              </Link>
             </div>
           </div>
-        </section>
-
-        {/* Main Content */}
-        <section className="py-16">
-          <div className="container-custom">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {/* Image */}
-              <AnimatedSection direction="left">
-                <div className="relative h-[500px] w-full rounded-xl overflow-hidden shadow-xl">
-                  <Image
-                    src="https://images.pexels.com/photos/7988116/pexels-photo-7988116.jpeg"
-                    alt="Developer Portrait"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    style={{ objectFit: "cover" }}
-                    className="rounded-xl"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                </div>
-              </AnimatedSection>
-
-              {/* Bio */}
-              <AnimatedSection direction="right">
-                <h2 className="text-3xl font-bold mb-6">My Story</h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  I'm a passionate full-stack developer with a focus on the MERN
-                  stack (MongoDB, Express, React, Node.js). With over 5 years of
-                  experience in web development, I've had the opportunity to
-                  work on a wide range of projects from small business websites
-                  to complex web applications.
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  My journey in web development began when I was in college,
-                  where I discovered my passion for creating interactive and
-                  user-friendly web experiences. Since then, I've been
-                  constantly learning and improving my skills to stay up-to-date
-                  with the latest technologies and best practices.
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 mb-8">
-                  What drives me is the opportunity to solve complex problems
-                  and create solutions that make a positive impact. I believe in
-                  clean code, user-centered design, and the power of technology
-                  to transform businesses and lives.
-                </p>
-
-                <div className="flex gap-4 flex-wrap">
-                  <Link href="/projects" className="btn btn-primary">
-                    View My Work
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="btn border-2 border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800"
-                  >
-                    Get in Touch
-                  </Link>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
-        </section>
-
-       
-      </motion.div>
+        </AnimatedSection>
+      </section>
     </>
   );
 };
