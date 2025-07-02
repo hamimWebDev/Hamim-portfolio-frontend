@@ -9,6 +9,7 @@ import { useEffect } from "react";
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const auth = useAuth();
   const user = auth?.user;
+  console.log(user)
   const router = useRouter();
 
   useEffect(() => {

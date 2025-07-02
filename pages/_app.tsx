@@ -10,13 +10,13 @@ import { store } from "@/redux/store";
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <Provider store={store}>
-      <MainLayout>
-        <AnimatePresence mode="wait">
-          <AuthProvider>
+      <AuthProvider>
+        <MainLayout>
+          <AnimatePresence mode="wait">
             <Component {...pageProps} key={router.route} />
-          </AuthProvider>
-        </AnimatePresence>
-      </MainLayout>
+          </AnimatePresence>
+        </MainLayout>
+      </AuthProvider>
     </Provider>
   );
 }

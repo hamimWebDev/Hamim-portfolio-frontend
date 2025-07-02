@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiGithub, FiExternalLink } from "react-icons/fi";
-import { Badge } from "./ui/Badge";
+import Badge from "./ui/Badge";
 
 interface Project {
   title: string;

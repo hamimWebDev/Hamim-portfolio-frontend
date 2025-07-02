@@ -1,8 +1,9 @@
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, ReactNode } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import useTheme from '@/hooks/useTheme';
+import { Toaster } from 'sonner';
+import ScrollToTop from '@/components/ui/ScrollToTop';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -15,9 +16,6 @@ const MainLayout: FC<MainLayoutProps> = ({
   title = 'Md. Hamim Howlader Asif',
   description = 'Professional MERN stack developer portfolio showcasing projects and skills',
 }) => {
- 
-  const { darkMode } = useTheme();
-
   return (
     <>
       <Head>
@@ -32,6 +30,16 @@ const MainLayout: FC<MainLayoutProps> = ({
         <main className="flex-grow">{children}</main>
         <Footer />
       </div>
+      
+      <ScrollToTop />
+      
+      <Toaster 
+        position="bottom-right"
+        richColors
+        closeButton
+        duration={4000}
+        theme="dark"
+      />
     </>
   );
 };

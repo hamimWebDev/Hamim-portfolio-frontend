@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import profileImage from "../Images/H-letter-logo.jpg";
 import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { logout } from "@/redux/features/auth/authSlice";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -14,32 +16,17 @@ const navItems = [
   { name: "Blogs", path: "/blogs" },
 ];
 
-const useTheme = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setDarkMode(true);
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    setDarkMode((prev) => {
-      const newMode = !prev;
-      localStorage.setItem("theme", newMode ? "dark" : "light");
-      return newMode;
-    });
-  };
-
-  return { darkMode, toggleTheme };
-};
-
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { darkMode, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { user, token } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,8 +40,13 @@ const Navbar = () => {
   const navbarClasses = `fixed w-full z-50 transition-all duration-300 ${
     isScrolled
       ? "bg-white bg-opacity-90 dark:bg-gray-900 dark:bg-opacity-90 shadow-md backdrop-blur-sm py-4"
-      : "bg-transparent py-6"
+      : "py-6"
   }`;
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/");
+  };
 
   return (
     <header className={navbarClasses}>
@@ -88,15 +80,25 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
-
-        {/* Theme toggle and mobile menu button */}
-        <div className="flex items-center space-x-4">
-          <Image
-            src={profileImage}
-            alt="Portfolio Logo"
-            className="w-8 h-8 rounded-full"
-          />
-
+        <div className="flex items-center gap-4">
+          {mounted && user ? (
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              <FiLogOut size={16} />
+              Logout
+            </button>
+          ) : mounted && !user ? (
+            <Link
+              href="/login"
+              className="px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 transition-colors rounded-lg"
+            >
+              Login
+            </Link>
+          ) : (
+            <div className="w-16 h-9 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"></div>
+          )}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
@@ -133,6 +135,31 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
+            {/* Mobile Login/Logout */}
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+              {mounted && user ? (
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center gap-2 w-full px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+                >
+                  <FiLogOut size={16} />
+                  Logout
+                </button>
+              ) : mounted && !user ? (
+                <Link
+                  href="/login"
+                  className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 transition-colors rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Login
+                </Link>
+              ) : (
+                <div className="w-full h-9 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"></div>
+              )}
+            </div>
           </div>
         )}
       </motion.div>

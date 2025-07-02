@@ -1,22 +1,22 @@
-import { RootState } from "@/redux/store";
 import { setTheme } from "@/redux/themeSlice";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
+import { useDispatch } from "react-redux";
 
 export const useTheme = () => {
-  const { darkMode } = useSelector((state: RootState) => state.theme);
   const dispatch = useDispatch();
 
-  // Effect to enforce dark mode
+  // Initialize theme on mount - always use dark mode
   useEffect(() => {
-    dispatch(setTheme(true)); // Always set dark mode
+    // Always set to dark mode
+    dispatch(setTheme(true));
+    
+    // Always add dark class to document
     document.documentElement.classList.add("dark");
     localStorage.setItem("theme", "dark");
   }, [dispatch]);
 
   return {
-    darkMode,
+    darkMode: true, // Always return true for dark mode
   };
 };
 

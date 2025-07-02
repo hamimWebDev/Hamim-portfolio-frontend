@@ -23,10 +23,39 @@ const blogsApi = baseApi.injectEndpoints({
       providesTags: ["blogs"],
       transformResponse: (response: any) => response?.data,
     }),
+  
+    updateBlog: builder.mutation({
+      query: ({ id, formData }: { id: string; formData: FormData }) => ({
+        url: `/blog/${id}`,
+        method: "PUT",
+        body: formData,
+        // Don't set Content-Type header for FormData, let the browser set it with boundary
+      }),
+      invalidatesTags: ["blogs"],
+    }),
+    deleteBlog: builder.mutation({
+      query: (id: string) => ({
+        url: `/blog/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["blogs"],
+    }),
+    createBlog: builder.mutation({
+      query: (formData: FormData) => ({
+        url: "/blog",
+        method: "POST",
+        body: formData,
+        // Don't set Content-Type header for FormData, let the browser set it with boundary
+      }),
+      invalidatesTags: ["blogs"],
+    }),
   }),
 });
 
 export const {
   useGetAllblogsQuery,
-  useGetBlogByIdQuery
+  useGetBlogByIdQuery,
+  useCreateBlogMutation,
+  useUpdateBlogMutation,
+  useDeleteBlogMutation,
 } = blogsApi;

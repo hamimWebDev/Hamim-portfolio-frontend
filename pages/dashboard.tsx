@@ -1,16 +1,18 @@
-
-import PrivateRoute from "@/components/PrivateRoute";
+import AdminDashboardLayout from "@/components/AdminDashboardLayout";
+import PrivateRoute from "@/pages/utils/PrivateRoute";
+import dynamic from "next/dynamic";
 import { NextPage } from "next";
 
+const AdminDashboardContent = dynamic(
+  () => import("@/components/AdminDashboardContent")
+);
 
-const Dashboard : NextPage = () => {
-  return (
-    <PrivateRoute>
-      <div className="p-5">
-        <h1 className="text-2xl">Welcome to Dashboard (Private Page)</h1>
-      </div>
+const Dashboard: NextPage = () => (
+  <AdminDashboardLayout>
+    <PrivateRoute allowedRoles={["admin"]}>
+      <AdminDashboardContent />
     </PrivateRoute>
-  );
-};
+  </AdminDashboardLayout>
+);
 
 export default Dashboard;
