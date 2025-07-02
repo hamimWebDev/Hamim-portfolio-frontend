@@ -18,7 +18,7 @@ export default function AdminDashboardLayout({ children }: { children: ReactNode
     <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900 mt-16">
       {/* Mobile Hamburger Button */}
       <button
-        className="md:hidden fixed mt-10 top-6 right-4 z-40 bg-white dark:bg-gray-800 p-2 rounded-full shadow"
+        className="md:hidden fixed mt-[66px] top-6 right-4 z-40 bg-white dark:bg-gray-800 p-2 rounded-full shadow"
         onClick={() => setSidebarOpen(true)}
         aria-label="Open sidebar"
       >

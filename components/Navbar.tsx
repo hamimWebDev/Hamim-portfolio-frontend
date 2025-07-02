@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { FiMenu, FiX, FiLogOut } from "react-icons/fi";
+import { MdDashboard } from "react-icons/md";
 import profileImage from "../Images/H-letter-logo.jpg";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -84,9 +85,9 @@ const Navbar = () => {
           {mounted && user && (
             <Link
               href="/dashboard"
-              className="px-4 py-2 text-sm font-medium text-white bg-slate-500 transition-colors rounded-lg"
+              className="px-4 py-2 ml-10 text-sm font-medium text-white bg-slate-500 hover:bg-slate-700 transition-colors rounded-lg"
             >
-              D
+              <MdDashboard size={20} />
             </Link>
           )}
           {mounted && user ? (
