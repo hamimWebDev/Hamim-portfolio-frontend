@@ -12,7 +12,7 @@ const Contact: NextPage = () => {
         <title>Contact Me | Portfolio</title>
         <meta name="description" content="Contact page for portfolio" />
       </Head>
-      <section className="section bg-gray-900 min-h-screen flex flex-col justify-center items-center px-2 sm:px-4">
+      <section className="section bg-gray-900 min-h-screen flex flex-col justify-center items-center px-2 sm:px-4 mt-4">
         <div className="container-custom w-full">
           <AnimatedSection delay={0.1}>
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-3 gradient-text">Contact Me</h1>

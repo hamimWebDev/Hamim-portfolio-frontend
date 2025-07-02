@@ -81,6 +81,14 @@ const Navbar = () => {
           ))}
         </div>
         <div className="flex items-center gap-4">
+          {mounted && user && (
+            <Link
+              href="/dashboard"
+              className="px-4 py-2 text-sm font-medium text-white bg-slate-500 transition-colors rounded-lg"
+            >
+              D
+            </Link>
+          )}
           {mounted && user ? (
             <button
               onClick={handleLogout}
@@ -135,6 +143,16 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
+            {/* Mobile Dashboard Button */}
+            {mounted && user && (
+              <Link
+                href="/dashboard"
+                className="block px-4 py-2 rounded bg-primary-600 text-white text-center hover:bg-primary-700 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+            )}
             {/* Mobile Login/Logout */}
             <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
               {mounted && user ? (
